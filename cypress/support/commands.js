@@ -23,3 +23,18 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+import loc from "../support/locators";
+Cypress.Commands.add("login", (user, password) => {
+  cy.visit(loc.URL);
+
+  if (user) {
+    cy.get(loc.LOGIN.USER).type(user);
+  }
+
+  if (password) {
+    cy.get(loc.LOGIN.PASSWORD).type(password);
+  }
+
+  cy.get(loc.LOGIN.BTN_LOGIN).click();
+});
