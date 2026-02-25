@@ -28,12 +28,14 @@ import loc from "../support/locators";
 Cypress.Commands.add("login", (user, password) => {
   cy.visit(loc.URL);
 
+  cy.url().should("include", "login");
+
   if (user) {
-    cy.get(loc.LOGIN.USER).type(user);
+    cy.get(loc.LOGIN.USER, { timeout: 10000 }).should("be.visible").type(user);
   }
 
   if (password) {
-    cy.get(loc.LOGIN.PASSWORD).type(password);
+    cy.get(loc.LOGIN.PASSWORD).should("be.visible").type(password);
   }
 
   cy.get(loc.LOGIN.BTN_LOGIN).click();

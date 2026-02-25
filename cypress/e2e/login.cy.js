@@ -15,8 +15,21 @@ describe("Testing the application", () => {
     cy.get(loc.MESSAGE).should("contain", "Invalid credentials");
   });
 
-  it.only("Deve apresentar erro ao inserir somente o usuário", () => {
+  it("Deve apresentar erro ao inserir somente o usuário", () => {
     cy.login("admin", "");
     cy.get(loc.MESSAGE_REQUIRED).should("contain", "Required");
+  });
+
+  it("Deve apresentar erro ao inserir somente a senha", () => {
+    cy.login("", "admin123");
+    cy.get(loc.MESSAGE_REQUIRED).should("contain", "Required");
+  });
+
+  it.only("Deve apresentar erro ao inserir e-mail ao invés de usuário", () => {
+    cy.login("teste@ucl.br", "admin123");
+    cy.get(loc.MESSAGE, { timeout: 10000 }).should(
+      "contain",
+      "Invalid credentials",
+    );
   });
 });
