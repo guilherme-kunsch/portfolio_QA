@@ -3,11 +3,13 @@ describe("Testing the application", () => {
   // })
   it("Registering a user", () => {
     cy.login("Admin", "admin123");
-    cy.contains(".oxd-main-menu-item", "Recruitment")
+    cy.contains(".oxd-main-menu-item", "Recruitment", { timeout: 10000 })
       .should("be.visible")
       .click();
 
-    cy.get(".orangehrm-header-container > .oxd-button").click();
+    cy.get(".orangehrm-header-container > .oxd-button", {
+      timeout: 10000,
+    }).click();
 
     cy.get('[name="firstName"]')
       .type("Guilherme")
@@ -21,16 +23,33 @@ describe("Testing the application", () => {
     cy.get(".oxd-select-dropdown")
       .contains("Senior Support Specialist")
       .click();
-    // cy.contains("label", "Email").parent().find("input"); //email
-    // cy.contains("label", "Contact Number").parent().find("input"); //contact number
 
-    // cy.get(".oxd-file-button"); //resume
+    cy.get(".oxd-grid-3.orangehrm-full-width-grid")
+      .find("input")
+      .eq(0)
+      .type("teste@teste.com")
+      .should("have.value", "teste@teste.com");
 
-    // cy.get(
-    //   ".orangehrm-save-candidate-page-full-width > .oxd-input-group > :nth-child(2) > .oxd-input",
-    // ); //keywords
+    cy.get(".oxd-grid-3.orangehrm-full-width-grid")
+      .find("input")
+      .eq(1)
+      .type("27997523768")
+      .should("have.value", "27997523768");
 
-    // cy.get(".oxd-date-input > .oxd-input"); //Date of Application
+    cy.get(".oxd-file-input").selectFile(
+      "cypress/fixtures/images/curriculo.pdf",
+      { force: true },
+    );
+
+    cy.contains("curriculo.pdf").should("be.visible");
+
+    cy.get(".oxd-grid-3.orangehrm-full-width-grid")
+      .find("input")
+      .eq(3)
+      .type("works, recruitment, emplooyes")
+      .should("have.value", "works, recruitment, emplooyes");
+
+    cy.get(".oxd-date-wrapper").find("input").click();
 
     // cy.get(".oxd-textarea"); //Notes
 
