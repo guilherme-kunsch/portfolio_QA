@@ -50,11 +50,22 @@ describe("Testing the application", () => {
       .should("have.value", "works, recruitment, emplooyes");
 
     cy.get(".oxd-date-wrapper").find("input").click();
+    cy.get(".oxd-calendar-wrapper")
+      .contains(".oxd-calendar-date", "25")
+      .click();
 
-    // cy.get(".oxd-textarea"); //Notes
+    cy.get(".oxd-grid-3.orangehrm-full-width-grid")
+      .find("textarea")
+      .type("Sabe programar e nadar!")
+      .should("have.value", "Sabe programar e nadar!");
 
-    // cy.get(".oxd-checkbox-input > .oxd-icon"); //checkbox
+    cy.get(".oxd-icon.bi-check.oxd-checkbox-input-icon").click();
 
-    // cy.get(".oxd-button--secondary"); //button save
+    cy.get(".oxd-button--secondary").click();
+
+    cy.get(".oxd-toast", { timeout: 5000 }).should(
+      "contain",
+      "Successfully Save",
+    );
   });
 });
