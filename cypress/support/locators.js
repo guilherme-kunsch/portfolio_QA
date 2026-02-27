@@ -13,6 +13,8 @@ const locators = {
     FIRST_NAME: '[name="firstName"]',
     MIDDLE_NAME: '[name="middleName"]',
     LAST_NAME: '[name="lastName"]',
+    REQUIRED:
+      "oxd-text.oxd-text--span.oxd-input-field-error-message.oxd-input-group__message",
     VACANCY: ".oxd-select-text",
     SELECT_VACANCY: ".oxd-select-dropdown",
     EMAIL: ".oxd-grid-3.orangehrm-full-width-grid",
@@ -25,6 +27,7 @@ const locators = {
     CHECKBOX: ".oxd-icon.bi-check.oxd-checkbox-input-icon",
     SALVE_BUTTON: ".oxd-button--secondary",
     MESSAGE: ".oxd-toast",
+    REQUIRED: "Required",
   },
 };
 

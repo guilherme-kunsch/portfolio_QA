@@ -69,4 +69,76 @@ describe("Testing the application", () => {
       "Successfully Save",
     );
   });
+
+  it("Registering candidate without last name", () => {
+    cy.login("Admin", "admin123");
+    cy.contains(loc.RECRUITMENT.NAV, "Recruitment", { timeout: 10000 })
+      .should("be.visible")
+      .click();
+
+    cy.get(loc.RECRUITMENT.ADD, {
+      timeout: 10000,
+    }).click();
+
+    cy.get(loc.RECRUITMENT.FIRST_NAME)
+      .type("Guilherme")
+      .should("have.value", "Guilherme");
+
+    cy.get(loc.RECRUITMENT.EMAIL)
+      .find("input")
+      .eq(0)
+      .type("teste@teste.com")
+      .should("have.value", "teste@teste.com");
+
+    cy.get(loc.RECRUITMENT.SALVE_BUTTON).click();
+
+    cy.contains(loc.RECRUITMENT.REQUIRED).should("be.visible");
+  });
+
+  it("Registering unnamed candidate", () => {
+    cy.login("Admin", "admin123");
+    cy.contains(loc.RECRUITMENT.NAV, "Recruitment", { timeout: 10000 })
+      .should("be.visible")
+      .click();
+
+    cy.get(loc.RECRUITMENT.ADD, {
+      timeout: 10000,
+    }).click();
+
+    cy.get(loc.RECRUITMENT.LAST_NAME)
+      .type("Neves")
+      .should("have.value", "Neves");
+
+    cy.get(loc.RECRUITMENT.EMAIL)
+      .find("input")
+      .eq(0)
+      .type("teste@teste.com")
+      .should("have.value", "teste@teste.com");
+
+    cy.get(loc.RECRUITMENT.SALVE_BUTTON).click();
+
+    cy.contains(loc.RECRUITMENT.REQUIRED).should("be.visible");
+  });
+
+  it.only("Registering a candidate without an email address", () => {
+    cy.login("Admin", "admin123");
+    cy.contains(loc.RECRUITMENT.NAV, "Recruitment", { timeout: 10000 })
+      .should("be.visible")
+      .click();
+
+    cy.get(loc.RECRUITMENT.ADD, {
+      timeout: 10000,
+    }).click();
+
+    cy.get(loc.RECRUITMENT.FIRST_NAME)
+      .type("Guilherme")
+      .should("have.value", "Guilherme");
+
+    cy.get(loc.RECRUITMENT.LAST_NAME)
+      .type("Neves")
+      .should("have.value", "Neves");
+
+    cy.get(loc.RECRUITMENT.SALVE_BUTTON).click();
+    cy.contains(loc.RECRUITMENT.REQUIRED).should("be.visible");
+  });
 });
