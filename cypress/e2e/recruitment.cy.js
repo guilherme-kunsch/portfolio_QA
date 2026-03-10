@@ -1,6 +1,6 @@
 import loc from "../support/locators";
 describe("Testing the application", () => {
-  it("Registering a recruitment", () => {
+  it.only("Registering a recruitment", () => {
     cy.login("Admin", "admin123");
     cy.contains(loc.RECRUITMENT.NAV, "Recruitment", { timeout: 10000 })
       .should("be.visible")
@@ -52,7 +52,7 @@ describe("Testing the application", () => {
 
     cy.get(loc.RECRUITMENT.CALENDAR).find("input").click();
     cy.get(loc.RECRUITMENT.SELECT_DATE)
-      .contains(".oxd-calendar-date", "25")
+      .contains(".oxd-calendar-date", "02")
       .click();
 
     cy.get(loc.RECRUITMENT.NOTES)
@@ -120,7 +120,7 @@ describe("Testing the application", () => {
     cy.contains(loc.RECRUITMENT.REQUIRED).should("be.visible");
   });
 
-  it.only("Registering a candidate without an email address", () => {
+  it("Registering a candidate without an email address", () => {
     cy.login("Admin", "admin123");
     cy.contains(loc.RECRUITMENT.NAV, "Recruitment", { timeout: 10000 })
       .should("be.visible")
