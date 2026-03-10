@@ -8,9 +8,8 @@ A automação tem como finalidade validar o funcionamento das principais funcion
 ## Funcionalidades automatizadas
 
 - Login no sistema
-- Validação de acesso ao dashboard
-- Navegação entre páginas
-- Validação de elementos na tela
+- Recrutamento
+- Preenchimento de formulários;
 
 ## Tecnologias utilizadas
 
